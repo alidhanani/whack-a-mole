@@ -40,5 +40,6 @@
 td {
   border-top: "none";
   border-bottom: "none";
-  padding: 30px;
+  padding: 40px;
+  padding-bottom: 80px;
 }
