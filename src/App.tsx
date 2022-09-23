@@ -1,4 +1,4 @@
-import { BackgroundImage, Table, Image } from '@mantine/core';
+import { BackgroundImage, Center, Image } from '@mantine/core';
 import './App.css';
 
 function App() {
@@ -24,11 +24,13 @@ function App() {
       src={process.env.PUBLIC_URL + '/WAM_bg.jpg'}
       style={{height: window.innerHeight}}
       >
-        <Table>
+        <Center>
+        <table style={{paddingTop: window.innerHeight / 3}}>
           <tbody>
             {rows}
           </tbody>
-        </Table>
+        </table>
+        </Center>
       </BackgroundImage>
   );
 }
