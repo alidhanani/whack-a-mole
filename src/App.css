@@ -37,9 +37,13 @@
   }
 }
 
+tr {
+  height: 150px;
+}
+
 td {
   border-top: "none";
   border-bottom: "none";
-  padding: 40px;
-  padding-bottom: 80px;
+  padding: 30px;
+  padding-bottom: 50px;
 }
