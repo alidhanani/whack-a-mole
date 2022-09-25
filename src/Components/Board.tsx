@@ -3,7 +3,7 @@ import { Center } from "@mantine/core";
 const Board = (props: { Cursor: string; Data: any[]}) => {
     return (
         <Center>
-        <table style={{cursor: `url(${props.Cursor}), auto;`}}>
+        <table style={{cursor: `url(${props.Cursor}), pointer;`}}>
           <tbody>
             {
               props.Data.map((value, index) => (

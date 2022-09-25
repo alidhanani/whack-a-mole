@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useTimer } from 'react-timer-hook';
 import './Main.css';
 import Board from './Board';
-import { HOLE, MOLE, Cursor, BACKGROUND } from './Constant';
+import { HOLE, MOLE, BACKGROUND } from './Constant';
 import FinalModal from './FinalModal';
 import InitalModal from './InitalModal';
 import { Score } from "./Score";
@@ -13,7 +13,7 @@ import WAM_Hammer from './WAM_Hammer.png'
 function Main() {
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 59);
+  time.setSeconds(time.getSeconds() + 119);
   const {
     seconds,
     restart,
@@ -79,7 +79,7 @@ function Main() {
   return (
       <BackgroundImage
         src={process.env.PUBLIC_URL + BACKGROUND}
-        style={{height: window.innerHeight, cursor: `url(${WAM_Hammer}), auto;`}}
+        style={{height: window.innerHeight, cursor: `url(${WAM_Hammer}), pointer;`}}
       >
         <InitalModal IsOpen={openedInit} onClose={() => setOpenedInit(false)} OnButtonPress={() => {
         setScore(0);
