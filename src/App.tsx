@@ -1,7 +1,10 @@
-import { BackgroundImage, Button, Center, Group, Image, Modal } from '@mantine/core';
+import { BackgroundImage, Center, Group, Image} from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useTimer } from 'react-timer-hook';
 import './App.css';
+import FinalModal from './FinalModal';
+import InitalModal from './InitalModal';
+import { Score } from "./Score";
 
 function App() {
 
@@ -10,7 +13,14 @@ function App() {
   const {
     seconds,
     restart,
-  } = useTimer({expiryTimestamp: time, onExpire: () => setOpened(true)});
+  } = useTimer({expiryTimestamp: time, onExpire: () => {
+    setOpened(true)
+    const pushValue: Score = {
+      name: name,
+      value: score
+    }
+    setScoreArray(preValue => [...preValue!, pushValue])
+  }});
 
 
   const HOLE = '/WAM_Hole.png'
@@ -18,8 +28,14 @@ function App() {
   const Cursor = '/WAM_Hammer.png'
 
   const [pic, setPic] = useState<string[]>([HOLE,HOLE,HOLE,HOLE,HOLE,HOLE,HOLE,HOLE,HOLE,HOLE,HOLE,HOLE]);
+  const [name, setName] = useState("")
   const [score, setScore] = useState<number>(0)
   const [opened, setOpened] = useState(false);
+  const [openedInit, setOpenedInit] = useState(true);
+  const [scoreArray, setScoreArray] = useState<Score[]>([{
+    name: "Ali",
+    value: 23
+  }]);
 
   const rowElem1 = [0, 1, 2, 3]
   const rowElem2 = [4, 5, 6, 7]
@@ -65,34 +81,15 @@ function App() {
       src={process.env.PUBLIC_URL + '/WAM_bg.jpg'}
       style={{height: window.innerHeight}}
       >
-        <Modal
-          opened={opened}
-          onClose={() => setOpened(false)}
-          title="Time Out"
-          withCloseButton={false}
-          closeOnClickOutside={false}
-          closeOnEscape={false}
-        >
-          <table>
-          <thead>
-            <tr>
-              <th>Guest</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-            <tbody>
-              <tr>
-                <td>Name</td>
-                <td>{score}</td>
-              </tr>
-            </tbody>
-          </table>
-          <Button onClick={() => {
+        <InitalModal IsOpen={openedInit} onClose={() => setOpenedInit(false)} OnButtonPress={ () =>{
             setScore(0)
             restart(time)
+            setOpenedInit(false)
+        }} onTextChange={(event: any) => setName(event.target.value)} />
+        <FinalModal IsOpen={opened} onClose={() => setOpened(false)} OnButtonPress={() => {
             setOpened(false)
-          }} >Restart</Button>
-        </Modal>
+            setOpenedInit(true)
+          }} ShowData={scoreArray!} />
         <Group position="apart" style={{padding: "10px"}}>
           <div className="scoreboard">
             <h2 className='scoreLabel'>Score</h2>
