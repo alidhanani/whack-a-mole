@@ -59,7 +59,7 @@ function App() {
   },[pic])
 
   const onArrayClick = (event: any) => {
-    if(event.target.src === (process.env.PUBLIC_URL + MOLE)) {
+    if(event.target.src === ("https://whack-a-mole-webgame.herokuapp.com" + MOLE)) {
       console.log("Success");
       setScore(oldvalue => oldvalue + 1)
     }
