@@ -1,10 +1,12 @@
-import { BackgroundImage, Center, Group, Image} from '@mantine/core';
+import { BackgroundImage, Image} from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useTimer } from 'react-timer-hook';
 import './App.css';
+import Board from './Board';
 import FinalModal from './FinalModal';
 import InitalModal from './InitalModal';
 import { Score } from "./Score";
+import Screenlabel from './Screenlabel';
 
 function App() {
 
@@ -57,7 +59,7 @@ function App() {
   },[pic])
 
   const onArrayClick = (event: any) => {
-    if(event.target.src === ("http://localhost:3000" + MOLE)) {
+    if(event.target.src === (process.env.PUBLIC_URL + MOLE)) {
       console.log("Success");
       setScore(oldvalue => oldvalue + 1)
     }
@@ -78,40 +80,20 @@ function App() {
 
   return (
       <BackgroundImage
-      src={process.env.PUBLIC_URL + '/WAM_bg.jpg'}
-      style={{height: window.innerHeight}}
+        src={process.env.PUBLIC_URL + '/WAM_bg.jpg'}
+        style={{height: window.innerHeight}}
       >
         <InitalModal IsOpen={openedInit} onClose={() => setOpenedInit(false)} OnButtonPress={() => {
         setScore(0);
         restart(time);
         setOpenedInit(false);
-      } } onTextChange={(event: any) => setName(event.target.value)} buttonDisable={name === "" ? true : false} />
+        } } onTextChange={(event: any) => setName(event.target.value)} buttonDisable={name === "" ? true : false} />
         <FinalModal IsOpen={opened} onClose={() => setOpened(false)} OnButtonPress={() => {
             setOpened(false)
             setOpenedInit(true)
           }} ShowData={scoreArray.sort((a,b) => a.value - b.value).reverse().slice(0, 9)!} />
-        <Group position="apart" style={{padding: "10px"}}>
-          <div className="scoreboard">
-            <h2 className='scoreLabel'>Score</h2>
-            <h1>{score}</h1>
-          </div>
-          <h2 className='timer' >Time: <span>{seconds}</span></h2>
-        </Group>
-        <Center>
-        <table style={{cursor: "url(http://localhost:3000" +Cursor+ "), auto"}}>
-          <tbody>
-            <tr className='board' key={"boardIndex1"}>
-              {rowElements1}
-            </tr>
-            <tr className='board' key={"boardIndex2"}>
-              {rowElements2}
-            </tr>
-            <tr className='board' key={"boardIndex3"}>
-              {rowElements3}
-            </tr>
-          </tbody>
-        </table>
-        </Center>
+        <Screenlabel Score={score} Time={seconds} />
+        <Board Cursor={Cursor} Data={[rowElements1, rowElements2, rowElements3]} />
       </BackgroundImage>
   );
 }
