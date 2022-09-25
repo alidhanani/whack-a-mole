@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import Main from './Main';
 
 test('Check for welcome screen', () => {
-  render(<App />);
+  render(<Main />);
   const linkElement = screen.getByText("Welcome");
   expect(linkElement).toBeInTheDocument();
 });
