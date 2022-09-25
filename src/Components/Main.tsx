@@ -1,20 +1,21 @@
-import { BackgroundImage, Image} from '@mantine/core';
+import { Image} from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useTimer } from 'react-timer-hook';
 import './Main.css';
 import Board from './Board';
-import { HOLE, MOLE, BACKGROUND } from './Constant';
-import FinalModal from './FinalModal';
-import InitalModal from './InitalModal';
+import { HOLE, MOLE} from './Constant';
 import { Score } from "./Score";
 import Screenlabel from './Screenlabel';
 import WAM_Hammer from './WAM_Hammer.png'
+import BoardBackground from './BoardBackground';
+import Prompt from './Prompt';
 
 function Main() {
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 119);
   const {
+    minutes,
     seconds,
     restart,
   } = useTimer({expiryTimestamp: time, onExpire: () => {
@@ -58,7 +59,6 @@ function Main() {
 
   const onArrayClick = (event: any) => {
     if(event.target.src === ("http://localhost:3000" + MOLE)) {
-      console.log("Success");
       setScore(oldvalue => oldvalue + 1)
     }
   }
@@ -77,22 +77,20 @@ function Main() {
 
 
   return (
-      <BackgroundImage
-        src={process.env.PUBLIC_URL + BACKGROUND}
-        style={{height: window.innerHeight, cursor: `url(${WAM_Hammer}), pointer;`}}
-      >
-        <InitalModal IsOpen={openedInit} onClose={() => setOpenedInit(false)} OnButtonPress={() => {
-        setScore(0);
-        restart(time);
-        setOpenedInit(false);
-        } } onTextChange={(event: any) => setName(event.target.value)} buttonDisable={name === "" ? true : false} />
-        <FinalModal IsOpen={opened} onClose={() => setOpened(false)} OnButtonPress={() => {
-            setOpened(false)
-            setOpenedInit(true)
-          }} ShowData={scoreArray.sort((a,b) => a.value - b.value).reverse().slice(0, 9)!} />
-        <Screenlabel Score={score} Time={seconds} />
-        <Board Cursor={WAM_Hammer} Data={[rowElements1, rowElements2, rowElements3]} />
-      </BackgroundImage>
+      <BoardBackground Data={
+        <>
+          <Prompt FinalModalOpen={opened} FinalOnClose={() => setOpened(false)} FinalModalOnPress={() => {
+              setOpened(false)
+              setOpenedInit(true)
+            }} Data={scoreArray.sort((a,b) => a.value - b.value).reverse().slice(0, 9)!} InitModal={openedInit} InitClose={() => setOpenedInit(false)} InitButtonPress={() => {
+              setScore(0);
+              restart(time);
+              setOpenedInit(false);
+              } } onTextChange={(event: any) => setName(event.target.value)} ButtonDisable={name === "" ? true : false} />
+          <Screenlabel Score={score} Time={[minutes, seconds]} />
+          <Board Cursor={WAM_Hammer} Data={[rowElements1, rowElements2, rowElements3]} />
+        </>
+      }/>
   );
 }
 
