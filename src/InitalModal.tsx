@@ -1,7 +1,7 @@
 import { Modal, Button, TextInput } from "@mantine/core";
 
  
-const InitalModal = (props: { IsOpen: boolean; onClose: () => void; OnButtonPress: () => void; onTextChange: any}) => {
+const InitalModal = (props: { IsOpen: boolean; onClose: () => void; OnButtonPress: () => void; onTextChange: any, buttonDisable: boolean}) => {
     return (
         <Modal
           opened={props.IsOpen}
@@ -17,7 +17,7 @@ const InitalModal = (props: { IsOpen: boolean; onClose: () => void; OnButtonPres
             onChange={props.onTextChange}
             withAsterisk
             />  
-            <Button onClick={props.OnButtonPress} >Start</Button>
+            <Button disabled={props.buttonDisable} onClick={props.OnButtonPress} >Start</Button>
         </Modal>
      );
   };

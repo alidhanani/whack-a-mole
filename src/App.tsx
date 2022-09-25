@@ -64,15 +64,15 @@ function App() {
   }
 
   const rowElements1 = rowElem1.map((element, index) => (
-      <td style={{height: window.innerHeight / 5, width: window.innerWidth / 6}} height={150} onClick={onArrayClick} key={"Data"+element}><Image radius="xs" width={200} height={pic[element] === MOLE ? 150 : 50} src={process.env.PUBLIC_URL + pic[element]} /></td>
+      <td style={{height: window.innerHeight / 5, width: window.innerWidth / 6,  paddingBottom: "20px"}} height={150} onClick={onArrayClick} key={"Data"+element}><Image radius="xs" width={200} height={pic[element] === MOLE ? 150 : 50} src={process.env.PUBLIC_URL + pic[element]} /></td>
   ));
 
   const rowElements2 = rowElem2.map((element, index) => (
-      <td style={{height: window.innerHeight / 5, width: window.innerWidth / 6}} height={150}  onClick={onArrayClick} key={"Data"+element}><Image radius="xs" width={200} height={pic[element] === MOLE ? 150 : 50} src={process.env.PUBLIC_URL + pic[element]} /></td>
+      <td style={{height: window.innerHeight / 5, width: window.innerWidth / 6, paddingBottom: "20px"}} height={150}  onClick={onArrayClick} key={"Data"+element}><Image radius="xs" width={200} height={pic[element] === MOLE ? 150 : 50} src={process.env.PUBLIC_URL + pic[element]} /></td>
   ));
 
   const rowElements3 = rowElem3.map((element, index) => (
-    <td style={{height: window.innerHeight / 5, width: window.innerWidth / 6}} height={150} onClick={onArrayClick} key={"Data"+element}><Image radius="xs" width={200} height={pic[element] === MOLE ? 150 : 50} src={process.env.PUBLIC_URL + pic[element]} /></td>
+    <td style={{height: window.innerHeight / 5, width: window.innerWidth / 6,  paddingBottom: "20px"}} height={150} onClick={onArrayClick} key={"Data"+element}><Image radius="xs" width={200} height={pic[element] === MOLE ? 150 : 50} src={process.env.PUBLIC_URL + pic[element]} /></td>
   ));
 
 
@@ -81,11 +81,11 @@ function App() {
       src={process.env.PUBLIC_URL + '/WAM_bg.jpg'}
       style={{height: window.innerHeight}}
       >
-        <InitalModal IsOpen={openedInit} onClose={() => setOpenedInit(false)} OnButtonPress={ () =>{
-            setScore(0)
-            restart(time)
-            setOpenedInit(false)
-        }} onTextChange={(event: any) => setName(event.target.value)} />
+        <InitalModal IsOpen={openedInit} onClose={() => setOpenedInit(false)} OnButtonPress={() => {
+        setScore(0);
+        restart(time);
+        setOpenedInit(false);
+      } } onTextChange={(event: any) => setName(event.target.value)} buttonDisable={name === "" ? true : false} />
         <FinalModal IsOpen={opened} onClose={() => setOpened(false)} OnButtonPress={() => {
             setOpened(false)
             setOpenedInit(true)
@@ -100,13 +100,13 @@ function App() {
         <Center>
         <table style={{cursor: "url(http://localhost:3000" +Cursor+ "), auto"}}>
           <tbody>
-            <tr key={"boardIndex1"}>
+            <tr className='board' key={"boardIndex1"}>
               {rowElements1}
             </tr>
-            <tr key={"boardIndex2"}>
+            <tr className='board' key={"boardIndex2"}>
               {rowElements2}
             </tr>
-            <tr key={"boardIndex3"}>
+            <tr className='board' key={"boardIndex3"}>
               {rowElements3}
             </tr>
           </tbody>

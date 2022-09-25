@@ -1,4 +1,4 @@
-import { Modal, Button } from "@mantine/core";
+import { Modal, Button, Table } from "@mantine/core";
 import { Score } from "./Score";
 
  
@@ -12,7 +12,7 @@ const FinalModal = (props: { IsOpen: boolean; onClose: () => void; OnButtonPress
           closeOnClickOutside={false}
           closeOnEscape={false}
         >
-          <table>
+          <Table verticalSpacing="xs">
           <thead>
             <tr>
               <th>Guest</th>
@@ -22,14 +22,14 @@ const FinalModal = (props: { IsOpen: boolean; onClose: () => void; OnButtonPress
             <tbody>
             {
                 props.ShowData.map((value: Score) => (
-                    <tr>
+                    <tr style={{padding: "50px"}}>
                     <td>{value.name}</td>
                     <td>{value.value}</td>
                     </tr>
                 ))
             }
             </tbody>
-          </table>
+          </Table>
           <Button onClick={props.OnButtonPress} >Restart</Button>
         </Modal>
      );

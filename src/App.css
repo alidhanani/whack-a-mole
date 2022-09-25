@@ -37,14 +37,8 @@
   }
 }
 
-tr {
+.board {
   height: 150px;
-}
-
-td {
-  border-top: "none";
-  border-bottom: "none";
-  padding-bottom: 50px;
 }
 
 .timer {
