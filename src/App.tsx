@@ -89,7 +89,7 @@ function App() {
         <FinalModal IsOpen={opened} onClose={() => setOpened(false)} OnButtonPress={() => {
             setOpened(false)
             setOpenedInit(true)
-          }} ShowData={scoreArray!} />
+          }} ShowData={scoreArray.sort((a,b) => a.value - b.value).reverse().slice(0, 9)!} />
         <Group position="apart" style={{padding: "10px"}}>
           <div className="scoreboard">
             <h2 className='scoreLabel'>Score</h2>
